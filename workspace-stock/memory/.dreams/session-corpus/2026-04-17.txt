@@ -1,1 +1,0 @@
-[stock/sessions/3a1d1928-240c-4a28-a5a8-fd37a88889c9.jsonl#L5] User: [cron:cf7fa95f-64c0-4dec-b430-493bab61a45f 股票系统定期清理] 执行股票系统定期清理：cd "${OPENCLAW_HOME:-$HOME/.openclaw}/workspace-stock/stock_system" && bash scripts/cleanup_stock_system.sh Current time: Friday, April 17th, 2026 - 5:36 PM (Asia/Shanghai) / 2026-04-17 09:36 UTC Return your su

@@ -1,8 +1,0 @@
-{
-  "mcpConfig": {
-    "doc": {
-      "type": "streamable-http",
-      "url": "https://qyapi.weixin.qq.com/mcp/robot-doc?apikey=sy5zGfM0Pvc1xliXYuTAU3aOOLYfy9vulsmMjXPSSKqTeseoF7Akc2p6267V5eYGKmTxUKh0ossT20BrNGKzPw"
-    }
-  }
-}

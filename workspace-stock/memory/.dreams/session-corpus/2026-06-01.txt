@@ -1,2 +1,0 @@
-[stock/sessions/stock/35c736d7-2c03-4509-92ce-0c61a645dc5c.jsonl#L2] Assistant: 收到股票系统定期清理任务通知。让我查看并执行这个清理脚本。
-[stock/sessions/stock/85b4a1de-c220-44dd-8b95-b7a88db5ac93.jsonl#L6] Assistant: 收到股票系统定期清理任务通知。让我查看并执行这个清理脚本。

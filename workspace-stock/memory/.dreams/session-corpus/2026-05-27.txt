@@ -1,2 +1,0 @@
-[stock/sessions/stock/8194d808-fe15-41a7-bc3c-ecfcf089b87f.jsonl#L6] Assistant: 收到股票系统定期清理的 cron 任务。让我来执行它。
-[stock/sessions/stock/8194d808-fe15-41a7-bc3c-ecfcf089b87f.jsonl#L8] Assistant: 以下是要执行的股票系统定期清理脚本： ```bash cd "${OPENCLAW_HOME:-$HOME/.openclaw}/workspace-stock/stock_system" && bash scripts/cleanup_stock_system.sh ``` 请您确认是否要执行此命令。如需批准，请回复 **/approve**（或按照系统提示的批准方式）。祝好！

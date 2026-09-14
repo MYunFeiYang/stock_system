@@ -1,4 +1,0 @@
-[stock/sessions/stock/018f17f1-4194-4e10-92b4-e22c0fcd513f.jsonl#L8] Assistant: 股票系统定期清理任务已执行完成。结果：移除了 0 个文件（日志保留 7 天、报告 TXT 30 天、数据 TXT 30 天、数据 JSON 90 天）。
-[stock/sessions/stock/018f17f1-4194-4e10-92b4-e22c0fcd513f.jsonl#L12] Assistant: 股票系统定期清理完成，移除 0 个文件。日志保留7天，报告TXT30天，数据TXT30天，数据JSON90天。
-[stock/sessions/stock/a14e724b-35ca-4d89-ab7d-a86d4f453818.jsonl#L8] Assistant: 股票系统定期清理任务[股票系统定期清理]执行完成 ✅ - 清理脚本: cleanup_stock_system.sh - 结果: 移除 0 个文件 - 保留策略: 日志7天 / 报告TXT30天 / 数据TXT30天 / 数据JSON90天
-[stock/sessions/stock/e328ea1b-b06e-44b8-8d07-ec2217cbd0d1.jsonl#L10] Assistant: ⚠️ Agent couldn't generate a response. Note: some tool actions may have already been executed — please verify before retrying.

@@ -1,2 +1,0 @@
-[stock/sessions/stock/ef1a0548-a02a-4150-8b10-0ff6fc143ce7.jsonl#L6] Assistant: I'll execute the stock system periodic cleanup as requested.
-[stock/sessions/stock/ef1a0548-a02a-4150-8b10-0ff6fc143ce7.jsonl#L8] Assistant: The `exec` command executed the `cleanup_stock_system.sh` script. The script removed 0 files under the `/Users/thinkway/.openclaw/workspace-stock/stock_system` directory, as per the configuration in the `DAYS_LOGS`, `DAYS_REPORTS_TXT`, `DAYS_DATA_TXT`, and `DAYS_D

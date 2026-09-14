@@ -1,2 +1,0 @@
-[stock/sessions/stock/d2de1edc-140a-4473-8247-47ed39f9805b.jsonl#L8] Assistant: 脚本执行成功。股票系统定期清理任务完成，移除了 0 个文件（日志保留 7 天，报告 TXT 保留 30 天，数据 TXT 保留 30 天，数据 JSON 保留 90 天）。 让我查看一下清理脚本的具体规则：
-[stock/sessions/stock/d2de1edc-140a-4473-8247-47ed39f9805b.jsonl#L10] Assistant: 脚本已执行，清理完成。日志中显示： > **cleanup_stock_system: removed 0 file(s) under /Users/thinkway/.openclaw/workspace-stock/stock_system (DAYS_LOGS=7 DAYS_REPORTS_TXT=30 DAYS_DATA_TXT=30 DAYS_DATA_JSON=90)** 当前目录下没有任何文件符合 “早于指定天数” 的规则，所以没有被删除。若以后发现有需要保留更久或更短时间的文件，可通过设置相应环境变量（如

@@ -1,1 +1,0 @@
-{"name": "auto_route", "description": "自动检测用户问题场景并路由至对应模型", "version": "1.0", "author": "OpenClaw", "type": "exec", "entrypoint": "~/.openclaw/skills/auto_route/exec.py", "parameters": [{"name": "user_input", "type": "string", "description": "用户原始提问内容"}]}

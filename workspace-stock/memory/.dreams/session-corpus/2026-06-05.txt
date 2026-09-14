@@ -1,4 +1,0 @@
-[stock/sessions/stock/27df7d20-7b0d-437c-b709-45d33ba462a0.jsonl#L24] Assistant: I see the morning analysis script is running but appears to be stuck (likely due to network operations fetching stock data). Let me spawn a background task to handle this analysis:
-[stock/sessions/stock/49204690-b481-4baf-b5f2-432320644576.jsonl#L8] Assistant: 执行股票系统定期清理脚本：
-[stock/sessions/stock/49204690-b481-4baf-b5f2-432320644576.jsonl#L10] Assistant: 股票系统定期清理已执行完成。清理脚本运行后未删除任何文件（所有日志、报告和数据文件均在保留期限内）。 执行详情： - 工作目录：/Users/thinkway/.openclaw/workspace-stock/stock_system - 保留策略：日志7天，报告文本30天，数据文本30天，数据JSON 90天 - 删除文件数：0 清理任务已按计划（每日02:00）正常运行。如需调整清理规则或查看具体文件状态，请告诉我。
-[stock/sessions/stock/a5f52d42-2de4-47fb-8489-b35951d3134c.jsonl#L8] Assistant: 脚本已执行。运行结果显示今天没有找到早盘预测文件（跳过复盘），但全日汇总正常完成。让我读取详细报告：

@@ -1,1 +1,0 @@
-[stock/sessions/stock/6d446ccd-90e2-44ab-ba23-fe68eebbd9b2.jsonl#L8] Assistant: The cleanup script has been reviewedand is properly configured to: 1. Remove old logs (7-day default) 2. Delete expired reports (30-day default) 3. Clear outdated data files (30-day for txt, 90-day for json) 4. Preserve critical iteration state files The cron job 

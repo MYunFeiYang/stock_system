@@ -1,3 +1,0 @@
-[stock/sessions/stock/942aac86-8d01-401f-b1cd-0e36ae45a928.jsonl#L6] Assistant: I'll execute the stock system cleanup script now. </assistant>
-[stock/sessions/stock/942aac86-8d01-401f-b1cd-0e36ae45a928.jsonl#L8] Assistant: </assistant>
-[stock/sessions/stock/942aac86-8d01-401f-b1cd-0e36ae45a928.jsonl#L10] Assistant: 股票系统定期清理已成功完成： **清理结果：** - 移除了 2 个过期文件 - 保留策略： - 日志文件：保留 7 天 - 报告文件 TXT：保留 30 天 - 数据文件 TXT：保留 30 天 - 数据文件 JSON：保留 90 天 工作目录：`/Users/thinkway/.openclaw/workspace-stock/stock_system`

@@ -1,2 +1,0 @@
-# 主链路 refactored/ 仅依赖 Python 标准库；行情经本机 openclaw CLI。
-# 若自行扩展脚本再在此添加第三方包。

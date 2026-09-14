@@ -1,2 +1,0 @@
-[stock/sessions/stock/24a64942-7867-41ae-83ab-e78a97e8d0b8.jsonl#L5] User: Say just the word hello
-[stock/sessions/stock/24a64942-7867-41ae-83ab-e78a97e8d0b8.jsonl#L6] Assistant: hello

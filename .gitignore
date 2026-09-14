@@ -1,119 +1,18 @@
-# Local env (optional; keep out of repo if you add secrets here)
-.env
-.env.*
-!.env.example
-
-# Backup configs / runtime last-good copies
-openclaw.json.bak*
-openclaw.json.last-good
-
-# Secrets / device / TLS material
-identity/
-devices/
-ssl/
-
-# Runtime logs and app state
-logs/
-# Per-workspace OpenClaw UI/state (regenerated at runtime)
-**/.openclaw/workspace-state.json
-# memory/ — 暂随 Git 跟踪日记忆；若含敏感信息可恢复忽略
-media/
-delivery-queue/
-exec-approvals.json
-update-check.json
-
-# Agent conversation transcripts
-agents/**/sessions/
-subagents/
-
-# Cron execution logs (runtime)
-cron/runs/
-cron/jobs.json.bak
-
-# WeChat Work runtime maps (regenerated)
-wecom/
-
-# Workspace attestation files (runtime generated, per-workspace)
-workspace-attestations/
-
-# Legacy workspace/stock_system runtime artifacts (old directory; keep source/config tracked)
-workspace/stock_system/data/
-workspace/stock_system/logs/
-workspace/stock_system/reports/
-workspace/stock_system/pids/
-workspace/stock_system/*.log
-workspace/stock_system/config/
-
-# Dependencies and Python
-**/node_modules/
 __pycache__/
-*.py[cod]
-.venv/
-venv/
-
-# OS
+*.pyc
+*.pyo
+*.log
 .DS_Store
-
-# Stock system generated artifacts (path 修正: workspace-stock/stock_system)
-workspace-stock/stock_system/data/predictions_*.json
-workspace-stock/stock_system/data/summary_*.json
-workspace-stock/stock_system/data/day_review_*.json
-workspace-stock/stock_system/data/reconcile_*.json
-workspace-stock/stock_system/data/validation_metrics_*.json
-workspace-stock/stock_system/data/analysis_*.json
-workspace-stock/stock_system/data/a_stock_*.json
-workspace-stock/stock_system/data/accuracy_history.json
-workspace-stock/stock_system/data/clean_*.json
-workspace-stock/stock_system/data/consistent_*.json
-workspace-stock/stock_system/data/*_predictions.json
-workspace-stock/stock_system/data/*_report_*.json
-workspace-stock/stock_system/data/top5_*.json
-workspace-stock/stock_system/data/accuracy_*.json
-workspace-stock/stock_system/logs/
-workspace-stock/stock_system/reports/
-workspace-stock/stock_system/pids/
-workspace-stock/stock_system/*.txt
-!workspace-stock/stock_system/requirements.txt
-workspace-stock/stock_system/*.log
-workspace-stock/stock_system/predictions.db
-# 保留：仅调优参数入库（calibration_overrides.json 供 auto_calibration 读取，需跨克隆保留）
-!workspace-stock/stock_system/config/calibration_overrides.json
-# 忽略：loop 中间过程（每次运行自动再生，非调优参数，无需入库）
-workspace-stock/stock_system/data/iteration_state.json
-# iteration_briefing.txt 已被上方 *.txt 规则忽略
-# 保留：reconcile_history.jsonl 是准确率记分牌（append-only 小文件，跨克隆需保留，证明 loop 是否变准）
-!workspace-stock/stock_system/data/reconcile_history.jsonl
-# 忽略：策略失效预警运行时状态（可由 reconcile_history 重算，非调优参数）
-workspace-stock/stock_system/data/strategy_status.json
-
-plugin-runtime-deps/
-
-# --- OpenClaw runtime state & secrets (补 2026-08-11，避免误提交密钥/大库) ---
-# 运行时数据库（含鉴权凭据与全量状态，运行时再生）
-*.sqlite*
-
-# 迁移 / 备份残留（DB 备份、pre-update 旧配置、带时间戳备份）
-*.pre-update
+# 运行时产物(可重新生成, 不入库)
+data/
+reports/
+logs/
+pids/
 *.bak
-*.backup.*
+*.migrated
 
-# 运行时 / 缓存目录
-state/
-service-env/
-cache/
-npm/
-plugin-skills/
-skill-workshop/
-# 运行时临时目录（含 node-compile-cache / jiti / openclaw-* 临时工作区等）
-tmp/
-
-# 含密钥的插件目录（catalog.json 由运行时生成并嵌入 API Key，勿入库）
-agents/*/agent/plugins/*/catalog.json
-
-*.tmp
-
-# OpenClaw 自动记忆 / 梦境产物（后台进程每日再生，纯噪声，不入库）
-**/.dreams/
-**/DREAMS.md
-**/MEMORY.md
-**/memory/dreaming/
+# macOS / AppleDouble 垃圾文件
+.DS_Store
+._*
+..DS_Store*
+*.DS_Store*

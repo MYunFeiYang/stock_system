@@ -1,2 +1,0 @@
-[stock/sessions/stock/9f2cf98a-1122-4136-a4d0-30124ad8a88c.jsonl#L6] Assistant: 已收到，cron 任务已按计划执行。 若需要查看 `cleanup_stock_system.sh` 的详细日志或确认清理结果，随时告诉我即可。
-[stock/sessions/stock/e328ea1b-b06e-44b8-8d07-ec2217cbd0d1.jsonl#L12] Assistant: 已收到，cron 任务已按计划执行。 若需要查看 `cleanup_stock_system.sh` 的详细日志或确认清理结果，随时告诉我即可。

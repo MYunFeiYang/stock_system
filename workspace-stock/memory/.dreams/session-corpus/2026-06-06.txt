@@ -1,1 +1,0 @@
-[stock/sessions/stock/4b3a6967-8769-4305-9acd-a3602a0f5f4e.jsonl#L10] Assistant: The stock system cleanup job (ID: cf7fa95f-64c0-4dec-b430-493bab61a45f) is currently running. Here's its status: - **Scheduled**: Daily at 2:00 AM (Asia/Shanghai) - **Last Run**: 8:46 AM (current time) - just completed - **Status**: Running (last status was error

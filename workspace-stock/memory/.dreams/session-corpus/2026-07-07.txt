@@ -1,4 +1,0 @@
-[stock/sessions/stock/35c736d7-2c03-4509-92ce-0c61a645dc5c.jsonl#L18] Assistant: 股票系统定期清理已完成： ``` cleanup_stock_system: removed 1 file(s) under /Users/thinkway/.openclaw/workspace-stock/stock_system (DAYS_LOGS=7 DAYS_REPORTS_TXT=30 DAYS_DATA_TXT=30 DAYS_DATA_JSON=90) ```
-[stock/sessions/stock/cbf81e5e-d111-4ff3-835d-e40c990fa204.jsonl#L8] Assistant: 股票系统定期清理已完成： ``` cleanup_stock_system: removed 1 file(s) under /Users/thinkway/.openclaw/workspace-stock/stock_system (DAYS_LOGS=7 DAYS_REPORTS_TXT=30 DAYS_DATA_TXT=30 DAYS_DATA_JSON=90) ```
-[stock/sessions/stock/2941eb0d-6f0b-4be9-84da-42b7985e8a11.jsonl#L8] Assistant: 已发送通知。
-[stock/sessions/stock/a14e724b-35ca-4d89-ab7d-a86d4f453818.jsonl#L15] Assistant: 已为您启动股票早盘分析，正在执行脚本，稍后会向您汇报分析结果。

@@ -1,5 +1,0 @@
-[stock/sessions/stock/37970adb-1756-40ea-be9c-6ca9fa52c6c4.jsonl#L6] Assistant: 我来帮您检查早盘分析任务的执行情况。让我先查看股票系统目录的结构和早盘分析脚本的执行结果。
-[stock/sessions/stock/2bde5945-43f9-478e-b937-5c0a413ffe90.jsonl#L8] Assistant: 股票系统定期清理完成。 **清理结果：** - 日志文件（保留7天）：已清理完毕 - 报告文件（保留30天）：已清理完毕 - 数据文件TXT（保留30天）：已清理完毕 - 数据文件JSON（保留90天）：已清理完毕 本次共移除 0 个文件，说明当前数据均在保留期内。
-[stock/sessions/stock/37970adb-1756-40ea-be9c-6ca9fa52c6c4.jsonl#L10] Assistant: 现在让我执行早盘分析任务，并检查执行情况：
-[stock/sessions/stock/ca046e4b-c14d-4ee9-91ff-2bfd3edb1192.jsonl#L10] Assistant: 已按要求执行 A 股收盘复盘与全日汇总（含自校准）流程，执行结果如下： ``` 🚀 启动A股收盘复盘 + 全日汇总（含自校准） ====================================================================== 系统时间: 2026-06-04 18:44:36 ====================================================================== ── 1/2 收盘复盘（reconcile）── ❌ 未找到
-[stock/sessions/stock/ca046e4b-c14d-4ee9-91ff-2bfd3edb1192.jsonl#L10] Assistant: /Users/thinkway/.openclaw/workspace-stock/stock_system/data/day_review_20260604_184436.json 💾 报告: /Users/thinkway/.openclaw/workspace-stock/stock_system/reports/day_review_report_20260604_184436.txt ⚠️ 复盘阶段退出码 1（可能无早盘文件或拉价失败），仍已执行汇总。 (Command exited with code 1)

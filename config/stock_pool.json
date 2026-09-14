@@ -1,0 +1,959 @@
+{
+  "analysis_limits": {
+    "morning": 150,
+    "afternoon": 150,
+    "evening": 150,
+    "weekly": 150,
+    "default": 150
+  },
+  "stocks": [
+    {
+      "name": "牧原股份",
+      "symbol": "002714",
+      "sector": "农林牧渔",
+      "weight": 1.0
+    },
+    {
+      "name": "温氏股份",
+      "symbol": "300498",
+      "sector": "农林牧渔",
+      "weight": 1.0
+    },
+    {
+      "name": "海大集团",
+      "symbol": "002311",
+      "sector": "农林牧渔",
+      "weight": 0.54
+    },
+    {
+      "name": "正邦科技",
+      "symbol": "002157",
+      "sector": "农林牧渔",
+      "weight": 0.36
+    },
+    {
+      "name": "中粮糖业",
+      "symbol": "600737",
+      "sector": "农林牧渔",
+      "weight": 0.25
+    },
+    {
+      "name": "万华化学",
+      "symbol": "600309",
+      "sector": "基础化工",
+      "weight": 0.64
+    },
+    {
+      "name": "盐湖股份",
+      "symbol": "000792",
+      "sector": "基础化工",
+      "weight": 0.33
+    },
+    {
+      "name": "藏格矿业",
+      "symbol": "000408",
+      "sector": "基础化工",
+      "weight": 0.23
+    },
+    {
+      "name": "宝丰能源",
+      "symbol": "600989",
+      "sector": "基础化工",
+      "weight": 0.22
+    },
+    {
+      "name": "巨化股份",
+      "symbol": "600160",
+      "sector": "基础化工",
+      "weight": 0.21
+    },
+    {
+      "name": "包钢股份",
+      "symbol": "600010",
+      "sector": "钢铁",
+      "weight": 1.0
+    },
+    {
+      "name": "宝钢股份",
+      "symbol": "600019",
+      "sector": "钢铁",
+      "weight": 0.81
+    },
+    {
+      "name": "方大炭素",
+      "symbol": "600516",
+      "sector": "钢铁",
+      "weight": 0.45
+    },
+    {
+      "name": "钒钛股份",
+      "symbol": "000629",
+      "sector": "钢铁",
+      "weight": 0.44
+    },
+    {
+      "name": "久立特材",
+      "symbol": "002318",
+      "sector": "钢铁",
+      "weight": 0.41
+    },
+    {
+      "name": "紫金矿业",
+      "symbol": "601899",
+      "sector": "有色金属",
+      "weight": 1.0
+    },
+    {
+      "name": "洛阳钼业",
+      "symbol": "603993",
+      "sector": "有色金属",
+      "weight": 0.47
+    },
+    {
+      "name": "中国铝业",
+      "symbol": "601600",
+      "sector": "有色金属",
+      "weight": 0.26
+    },
+    {
+      "name": "中金黄金",
+      "symbol": "600489",
+      "sector": "有色金属",
+      "weight": 0.24
+    },
+    {
+      "name": "北方稀土",
+      "symbol": "600111",
+      "sector": "有色金属",
+      "weight": 0.23
+    },
+    {
+      "name": "寒武纪",
+      "symbol": "688256",
+      "sector": "电子",
+      "weight": 0.36
+    },
+    {
+      "name": "立讯精密",
+      "symbol": "002475",
+      "sector": "电子",
+      "weight": 0.27
+    },
+    {
+      "name": "长鑫科技",
+      "symbol": "688825",
+      "sector": "电子",
+      "weight": 0.27
+    },
+    {
+      "name": "北方华创",
+      "symbol": "002371",
+      "sector": "电子",
+      "weight": 0.26
+    },
+    {
+      "name": "中芯国际",
+      "symbol": "688981",
+      "sector": "电子",
+      "weight": 0.25
+    },
+    {
+      "name": "比亚迪",
+      "symbol": "002594",
+      "sector": "汽车",
+      "weight": 1.0
+    },
+    {
+      "name": "潍柴动力",
+      "symbol": "000338",
+      "sector": "汽车",
+      "weight": 0.74
+    },
+    {
+      "name": "福耀玻璃",
+      "symbol": "600660",
+      "sector": "汽车",
+      "weight": 0.47
+    },
+    {
+      "name": "宇通客车",
+      "symbol": "600066",
+      "sector": "汽车",
+      "weight": 0.21
+    },
+    {
+      "name": "拓普集团",
+      "symbol": "601689",
+      "sector": "汽车",
+      "weight": 0.19
+    },
+    {
+      "name": "美的集团",
+      "symbol": "000333",
+      "sector": "家用电器",
+      "weight": 1.0
+    },
+    {
+      "name": "格力电器",
+      "symbol": "000651",
+      "sector": "家用电器",
+      "weight": 1.0
+    },
+    {
+      "name": "海尔智家",
+      "symbol": "600690",
+      "sector": "家用电器",
+      "weight": 0.77
+    },
+    {
+      "name": "三花智控",
+      "symbol": "002050",
+      "sector": "家用电器",
+      "weight": 0.71
+    },
+    {
+      "name": "石头科技",
+      "symbol": "688169",
+      "sector": "家用电器",
+      "weight": 0.26
+    },
+    {
+      "name": "贵州茅台",
+      "symbol": "600519",
+      "sector": "食品饮料",
+      "weight": 1.0
+    },
+    {
+      "name": "伊利股份",
+      "symbol": "600887",
+      "sector": "食品饮料",
+      "weight": 0.97
+    },
+    {
+      "name": "五粮液",
+      "symbol": "000858",
+      "sector": "食品饮料",
+      "weight": 0.79
+    },
+    {
+      "name": "泸州老窖",
+      "symbol": "000568",
+      "sector": "食品饮料",
+      "weight": 0.36
+    },
+    {
+      "name": "海天味业",
+      "symbol": "603288",
+      "sector": "食品饮料",
+      "weight": 0.34
+    },
+    {
+      "name": "雅戈尔",
+      "symbol": "600177",
+      "sector": "纺织服饰",
+      "weight": 0.44
+    },
+    {
+      "name": "海澜之家",
+      "symbol": "600398",
+      "sector": "纺织服饰",
+      "weight": 0.34
+    },
+    {
+      "name": "伟星股份",
+      "symbol": "002003",
+      "sector": "纺织服饰",
+      "weight": 0.34
+    },
+    {
+      "name": "比音勒芬",
+      "symbol": "002832",
+      "sector": "纺织服饰",
+      "weight": 0.34
+    },
+    {
+      "name": "探路者",
+      "symbol": "300005",
+      "sector": "纺织服饰",
+      "weight": 0.28
+    },
+    {
+      "name": "太阳纸业",
+      "symbol": "002078",
+      "sector": "轻工制造",
+      "weight": 0.52
+    },
+    {
+      "name": "裕同科技",
+      "symbol": "002831",
+      "sector": "轻工制造",
+      "weight": 0.36
+    },
+    {
+      "name": "公牛集团",
+      "symbol": "603195",
+      "sector": "轻工制造",
+      "weight": 0.31
+    },
+    {
+      "name": "顾家家居",
+      "symbol": "603816",
+      "sector": "轻工制造",
+      "weight": 0.24
+    },
+    {
+      "name": "晨光股份",
+      "symbol": "603899",
+      "sector": "轻工制造",
+      "weight": 0.2
+    },
+    {
+      "name": "药明康德",
+      "symbol": "603259",
+      "sector": "医药生物",
+      "weight": 1.0
+    },
+    {
+      "name": "恒瑞医药",
+      "symbol": "600276",
+      "sector": "医药生物",
+      "weight": 0.48
+    },
+    {
+      "name": "迈瑞医疗",
+      "symbol": "300760",
+      "sector": "医药生物",
+      "weight": 0.31
+    },
+    {
+      "name": "联影医疗",
+      "symbol": "688271",
+      "sector": "医药生物",
+      "weight": 0.16
+    },
+    {
+      "name": "科伦药业",
+      "symbol": "002422",
+      "sector": "医药生物",
+      "weight": 0.14
+    },
+    {
+      "name": "长江电力",
+      "symbol": "600900",
+      "sector": "公用事业",
+      "weight": 1.0
+    },
+    {
+      "name": "中国核电",
+      "symbol": "601985",
+      "sector": "公用事业",
+      "weight": 0.5
+    },
+    {
+      "name": "三峡能源",
+      "symbol": "600905",
+      "sector": "公用事业",
+      "weight": 0.32
+    },
+    {
+      "name": "国电电力",
+      "symbol": "600795",
+      "sector": "公用事业",
+      "weight": 0.32
+    },
+    {
+      "name": "华电新能",
+      "symbol": "600930",
+      "sector": "公用事业",
+      "weight": 0.28
+    },
+    {
+      "name": "顺丰控股",
+      "symbol": "002352",
+      "sector": "交通运输",
+      "weight": 0.76
+    },
+    {
+      "name": "中远海控",
+      "symbol": "601919",
+      "sector": "交通运输",
+      "weight": 0.64
+    },
+    {
+      "name": "京沪高铁",
+      "symbol": "601816",
+      "sector": "交通运输",
+      "weight": 0.54
+    },
+    {
+      "name": "招商轮船",
+      "symbol": "601872",
+      "sector": "交通运输",
+      "weight": 0.52
+    },
+    {
+      "name": "大秦铁路",
+      "symbol": "601006",
+      "sector": "交通运输",
+      "weight": 0.46
+    },
+    {
+      "name": "保利发展",
+      "symbol": "600048",
+      "sector": "房地产",
+      "weight": 0.8
+    },
+    {
+      "name": "张江高科",
+      "symbol": "600895",
+      "sector": "房地产",
+      "weight": 0.58
+    },
+    {
+      "name": "万科A",
+      "symbol": "000002",
+      "sector": "房地产",
+      "weight": 0.51
+    },
+    {
+      "name": "招商蛇口",
+      "symbol": "001979",
+      "sector": "房地产",
+      "weight": 0.51
+    },
+    {
+      "name": "万通发展",
+      "symbol": "600246",
+      "sector": "房地产",
+      "weight": 0.45
+    },
+    {
+      "name": "中国中免",
+      "symbol": "601888",
+      "sector": "商贸零售",
+      "weight": 1.0
+    },
+    {
+      "name": "小商品城",
+      "symbol": "600415",
+      "sector": "商贸零售",
+      "weight": 0.71
+    },
+    {
+      "name": "万辰集团",
+      "symbol": "300972",
+      "sector": "商贸零售",
+      "weight": 0.4
+    },
+    {
+      "name": "供销大集",
+      "symbol": "000564",
+      "sector": "商贸零售",
+      "weight": 0.37
+    },
+    {
+      "name": "永辉超市",
+      "symbol": "601933",
+      "sector": "商贸零售",
+      "weight": 0.3
+    },
+    {
+      "name": "华测检测",
+      "symbol": "300012",
+      "sector": "社会服务",
+      "weight": 0.78
+    },
+    {
+      "name": "中公教育",
+      "symbol": "002607",
+      "sector": "社会服务",
+      "weight": 0.4
+    },
+    {
+      "name": "宋城演艺",
+      "symbol": "300144",
+      "sector": "社会服务",
+      "weight": 0.38
+    },
+    {
+      "name": "锦江酒店",
+      "symbol": "600754",
+      "sector": "社会服务",
+      "weight": 0.31
+    },
+    {
+      "name": "首旅酒店",
+      "symbol": "600258",
+      "sector": "社会服务",
+      "weight": 0.3
+    },
+    {
+      "name": "招商银行",
+      "symbol": "600036",
+      "sector": "银行",
+      "weight": 1.0
+    },
+    {
+      "name": "兴业银行",
+      "symbol": "601166",
+      "sector": "银行",
+      "weight": 0.87
+    },
+    {
+      "name": "农业银行",
+      "symbol": "601288",
+      "sector": "银行",
+      "weight": 0.7
+    },
+    {
+      "name": "工商银行",
+      "symbol": "601398",
+      "sector": "银行",
+      "weight": 0.67
+    },
+    {
+      "name": "交通银行",
+      "symbol": "601328",
+      "sector": "银行",
+      "weight": 0.55
+    },
+    {
+      "name": "中国平安",
+      "symbol": "601318",
+      "sector": "非银金融",
+      "weight": 1.0
+    },
+    {
+      "name": "中信证券",
+      "symbol": "600030",
+      "sector": "非银金融",
+      "weight": 1.0
+    },
+    {
+      "name": "东方财富",
+      "symbol": "300059",
+      "sector": "非银金融",
+      "weight": 0.95
+    },
+    {
+      "name": "国泰海通",
+      "symbol": "601211",
+      "sector": "非银金融",
+      "weight": 0.6
+    },
+    {
+      "name": "华泰证券",
+      "symbol": "601688",
+      "sector": "非银金融",
+      "weight": 0.39
+    },
+    {
+      "name": "东阳光",
+      "symbol": "600673",
+      "sector": "综合",
+      "weight": 1.0
+    },
+    {
+      "name": "粤桂股份",
+      "symbol": "000833",
+      "sector": "综合",
+      "weight": 0.77
+    },
+    {
+      "name": "时代新材",
+      "symbol": "600458",
+      "sector": "综合",
+      "weight": 0.54
+    },
+    {
+      "name": "亚泰集团",
+      "symbol": "600881",
+      "sector": "综合",
+      "weight": 0.46
+    },
+    {
+      "name": "综艺股份",
+      "symbol": "600770",
+      "sector": "综合",
+      "weight": 0.39
+    },
+    {
+      "name": "中国巨石",
+      "symbol": "600176",
+      "sector": "建筑材料",
+      "weight": 1.0
+    },
+    {
+      "name": "海螺水泥",
+      "symbol": "600585",
+      "sector": "建筑材料",
+      "weight": 0.86
+    },
+    {
+      "name": "中材科技",
+      "symbol": "002080",
+      "sector": "建筑材料",
+      "weight": 0.75
+    },
+    {
+      "name": "宏和科技",
+      "symbol": "603256",
+      "sector": "建筑材料",
+      "weight": 0.5
+    },
+    {
+      "name": "东方雨虹",
+      "symbol": "002271",
+      "sector": "建筑材料",
+      "weight": 0.48
+    },
+    {
+      "name": "中国建筑",
+      "symbol": "601668",
+      "sector": "建筑装饰",
+      "weight": 0.66
+    },
+    {
+      "name": "中国中铁",
+      "symbol": "601390",
+      "sector": "建筑装饰",
+      "weight": 0.53
+    },
+    {
+      "name": "中国电建",
+      "symbol": "601669",
+      "sector": "建筑装饰",
+      "weight": 0.51
+    },
+    {
+      "name": "中国能建",
+      "symbol": "601868",
+      "sector": "建筑装饰",
+      "weight": 0.47
+    },
+    {
+      "name": "中国铁建",
+      "symbol": "601186",
+      "sector": "建筑装饰",
+      "weight": 0.44
+    },
+    {
+      "name": "宁德时代",
+      "symbol": "300750",
+      "sector": "电力设备",
+      "weight": 1.0
+    },
+    {
+      "name": "阳光电源",
+      "symbol": "300274",
+      "sector": "电力设备",
+      "weight": 0.32
+    },
+    {
+      "name": "特变电工",
+      "symbol": "600089",
+      "sector": "电力设备",
+      "weight": 0.2
+    },
+    {
+      "name": "国电南瑞",
+      "symbol": "600406",
+      "sector": "电力设备",
+      "weight": 0.19
+    },
+    {
+      "name": "思源电气",
+      "symbol": "002028",
+      "sector": "电力设备",
+      "weight": 0.19
+    },
+    {
+      "name": "三一重工",
+      "symbol": "600031",
+      "sector": "机械设备",
+      "weight": 0.37
+    },
+    {
+      "name": "汇川技术",
+      "symbol": "300124",
+      "sector": "机械设备",
+      "weight": 0.37
+    },
+    {
+      "name": "华工科技",
+      "symbol": "000988",
+      "sector": "机械设备",
+      "weight": 0.25
+    },
+    {
+      "name": "杰瑞股份",
+      "symbol": "002353",
+      "sector": "机械设备",
+      "weight": 0.24
+    },
+    {
+      "name": "大族激光",
+      "symbol": "002008",
+      "sector": "机械设备",
+      "weight": 0.23
+    },
+    {
+      "name": "中国船舶",
+      "symbol": "600150",
+      "sector": "国防军工",
+      "weight": 1.0
+    },
+    {
+      "name": "光启技术",
+      "symbol": "002625",
+      "sector": "国防军工",
+      "weight": 0.34
+    },
+    {
+      "name": "中航沈飞",
+      "symbol": "600760",
+      "sector": "国防军工",
+      "weight": 0.33
+    },
+    {
+      "name": "航发动力",
+      "symbol": "600893",
+      "sector": "国防军工",
+      "weight": 0.33
+    },
+    {
+      "name": "松发股份",
+      "symbol": "603268",
+      "sector": "国防军工",
+      "weight": 0.3
+    },
+    {
+      "name": "海康威视",
+      "symbol": "002415",
+      "sector": "计算机",
+      "weight": 0.53
+    },
+    {
+      "name": "中科曙光",
+      "symbol": "603019",
+      "sector": "计算机",
+      "weight": 0.42
+    },
+    {
+      "name": "浪潮信息",
+      "symbol": "000977",
+      "sector": "计算机",
+      "weight": 0.33
+    },
+    {
+      "name": "科大讯飞",
+      "symbol": "002230",
+      "sector": "计算机",
+      "weight": 0.3
+    },
+    {
+      "name": "紫光股份",
+      "symbol": "000938",
+      "sector": "计算机",
+      "weight": 0.3
+    },
+    {
+      "name": "世纪华通",
+      "symbol": "002602",
+      "sector": "传媒",
+      "weight": 0.99
+    },
+    {
+      "name": "蓝色光标",
+      "symbol": "300058",
+      "sector": "传媒",
+      "weight": 0.57
+    },
+    {
+      "name": "分众传媒",
+      "symbol": "002027",
+      "sector": "传媒",
+      "weight": 0.56
+    },
+    {
+      "name": "昆仑万维",
+      "symbol": "300418",
+      "sector": "传媒",
+      "weight": 0.45
+    },
+    {
+      "name": "巨人网络",
+      "symbol": "002558",
+      "sector": "传媒",
+      "weight": 0.38
+    },
+    {
+      "name": "中际旭创",
+      "symbol": "300308",
+      "sector": "通信",
+      "weight": 1.0
+    },
+    {
+      "name": "新易盛",
+      "symbol": "300502",
+      "sector": "通信",
+      "weight": 1.0
+    },
+    {
+      "name": "天孚通信",
+      "symbol": "300394",
+      "sector": "通信",
+      "weight": 0.55
+    },
+    {
+      "name": "亨通光电",
+      "symbol": "600487",
+      "sector": "通信",
+      "weight": 0.4
+    },
+    {
+      "name": "中兴通讯",
+      "symbol": "000063",
+      "sector": "通信",
+      "weight": 0.36
+    },
+    {
+      "name": "中国神华",
+      "symbol": "601088",
+      "sector": "煤炭",
+      "weight": 1.0
+    },
+    {
+      "name": "陕西煤业",
+      "symbol": "601225",
+      "sector": "煤炭",
+      "weight": 1.0
+    },
+    {
+      "name": "电投能源",
+      "symbol": "002128",
+      "sector": "煤炭",
+      "weight": 0.56
+    },
+    {
+      "name": "中煤能源",
+      "symbol": "601898",
+      "sector": "煤炭",
+      "weight": 0.49
+    },
+    {
+      "name": "潞安环能",
+      "symbol": "601699",
+      "sector": "煤炭",
+      "weight": 0.39
+    },
+    {
+      "name": "中国石油",
+      "symbol": "601857",
+      "sector": "石油石化",
+      "weight": 1.0
+    },
+    {
+      "name": "中国石化",
+      "symbol": "600028",
+      "sector": "石油石化",
+      "weight": 1.0
+    },
+    {
+      "name": "中国海油",
+      "symbol": "600938",
+      "sector": "石油石化",
+      "weight": 1.0
+    },
+    {
+      "name": "桐昆股份",
+      "symbol": "601233",
+      "sector": "石油石化",
+      "weight": 0.64
+    },
+    {
+      "name": "荣盛石化",
+      "symbol": "002493",
+      "sector": "石油石化",
+      "weight": 0.63
+    },
+    {
+      "name": "高能环境",
+      "symbol": "603588",
+      "sector": "环保",
+      "weight": 0.49
+    },
+    {
+      "name": "紫金龙净",
+      "symbol": "600388",
+      "sector": "环保",
+      "weight": 0.41
+    },
+    {
+      "name": "浙富控股",
+      "symbol": "002266",
+      "sector": "环保",
+      "weight": 0.35
+    },
+    {
+      "name": "京蓝科技",
+      "symbol": "000711",
+      "sector": "环保",
+      "weight": 0.33
+    },
+    {
+      "name": "瀚蓝环境",
+      "symbol": "600323",
+      "sector": "环保",
+      "weight": 0.33
+    },
+    {
+      "name": "珀莱雅",
+      "symbol": "603605",
+      "sector": "美容护理",
+      "weight": 1.0
+    },
+    {
+      "name": "爱美客",
+      "symbol": "300896",
+      "sector": "美容护理",
+      "weight": 1.0
+    },
+    {
+      "name": "华熙生物",
+      "symbol": "688363",
+      "sector": "美容护理",
+      "weight": 0.75
+    },
+    {
+      "name": "稳健医疗",
+      "symbol": "300888",
+      "sector": "美容护理",
+      "weight": 0.57
+    },
+    {
+      "name": "上海家化",
+      "symbol": "600315",
+      "sector": "美容护理",
+      "weight": 0.54
+    },
+    {
+      "name": "隆基绿能",
+      "symbol": "601012",
+      "sector": "电力设备",
+      "weight": 0.5
+    },
+    {
+      "name": "平安银行",
+      "symbol": "000001",
+      "sector": "银行",
+      "weight": 0.5
+    },
+    {
+      "name": "京东方A",
+      "symbol": "000725",
+      "sector": "电子",
+      "weight": 0.5
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "updated_at": "2026-09-14T10:01:38.852885",
+  "source": "reconcile_history.jsonl",
+  "stats": {
+    "n_buy": 42,
+    "miss_buy": 29,
+    "n_sell": 56,
+    "miss_sell": 40,
+    "n_hold": 336,
+    "miss_hold": 240,
+    "n_strong_buy": 0,
+    "miss_strong_buy": 0,
+    "n_norm_buy": 42,
+    "miss_norm_buy": 29,
+    "n_strong_sell": 0,
+    "miss_strong_sell": 0,
+    "n_norm_sell": 56,
+    "miss_norm_sell": 40,
+    "w_buy": 11.463519387251557,
+    "miss_buy_w": 7.943339087680607,
+    "w_sell": 41.662026159665835,
+    "miss_sell_w": 30.375758126407064,
+    "w_hold": 219.18065271256432,
+    "miss_hold_w": 158.82670805422282,
+    "w_strong_buy": 0.0,
+    "miss_strong_buy_w": 0.0,
+    "w_norm_buy": 11.463519387251557,
+    "miss_norm_buy_w": 7.943339087680607,
+    "w_strong_sell": 0.0,
+    "miss_strong_sell_w": 0.0,
+    "w_norm_sell": 41.662026159665835,
+    "miss_norm_sell_w": 30.375758126407064,
+    "sessions_used": 16,
+    "decay_per_session": 0.88,
+    "last_sessions_cap": 20
+  },
+  "notes": [
+    "普通买入加权误判率偏高(69%)，略提高 buy 门槛。",
+    "普通卖出加权误判率偏高(73%)，略扩大持有带、减少边缘卖出。",
+    "卖出误判（加权）更多，略降技术面、增行业权重。",
+    "持有向加权误判率偏高(72%)，收窄评分意义上的持有带。"
+  ],
+  "signal_thresholds": {
+    "sell": 4.25,
+    "hold": 5.0,
+    "buy": 5.8,
+    "strong_buy": 6.5
+  },
+  "score_weights": {
+    "technical": 0.38,
+    "fundamental": 0.35,
+    "sentiment": 0.15,
+    "sector": 0.12
+  },
+  "auto_calibration": {
+    "decay_per_session": 0.88,
+    "last_sessions": 20,
+    "min_total_samples": 6,
+    "min_bucket_samples": 3,
+    "min_bucket_weight": 3.0,
+    "max_thresh_drift": 0.35,
+    "max_weight_drift": 0.06,
+    "step_th": 0.05,
+    "step_w": 0.02,
+    "miss_rate_high": 0.45,
+    "miss_rate_low": 0.2,
+    "miss_imbalance_ratio": 1.4,
+    "max_history_lines": 400
+  }
+}
