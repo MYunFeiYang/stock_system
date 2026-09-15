@@ -189,8 +189,13 @@ def _push_via_webhook(text: str, title: str = "") -> bool:
     return False
 
 
-def push_to_wecom(text: str, title: str = "") -> bool:
+def push_to_wecom(text: str, title: str = "") -> bool | None:
     """推送文本到企微(thinkway)。
+
+    三态返回：
+      True  = webhook 已配且发送成功
+      False = webhook 已配但发送失败（需排查 URL/网络）
+      None  = webhook 未配置（推送由外部通道负责，如 WorkBuddy 定时任务企微 bot 同步）
 
     背景：openclaw 2026.8.1 的 `message send --channel wecom` CLI 不再路由插件 channel
     （wecom 由插件注册，不在 CLI 核心 channel 枚举里），原主通道已失效；且 command 型
@@ -200,20 +205,24 @@ def push_to_wecom(text: str, title: str = "") -> bool:
     当前可用主通道：群机器人 webhook 直发（WECOM_WEBHOOK_URL）。该路径是确定性 HTTP
     POST，完全独立于 openclaw 的插件 channel 路由，不受上述 CLI 限制影响。脚本已内置
     _push_via_webhook 实现；只需在环境/ cron env 中配置 WECOM_WEBHOOK_URL 即可启用。
-    未配置时诚实返回失败并提示所需凭据，不假装成功。
+    未配置时返回 None（表示"未尝试、由外部通道推送"，不记为失败）。
     """
     import sys
     url = os.environ.get("WECOM_WEBHOOK_URL")
     if url:
         return _push_via_webhook(text, title)
-    # agentTurn cron 已通过 openclaw announce 把 stdout 经 wecom 投递，本函数仅作
-    # 群机器人 webhook 直发的备用路径（需 WECOM_WEBHOOK_URL）。未配置时静默返回 False
-    # （agentTurn 模式下 webhook 非主通道，打印提示只会污染 stdout/日志，无意义）。
-    return False
+    # webhook 未配置：推送由外部通道负责（如 WorkBuddy 定时任务企微 bot 同步 /
+    # openclaw gateway announce），本函数不视为失败，返回 None 让调用方跳过记录。
+    return None
 
 
-def _record_push_status(base_dir: str, ok: bool) -> None:
-    """记录推送成败到 data/push_status.json（跨运行累计连续失败，供早盘告警）。"""
+def _record_push_status(base_dir: str, ok: bool | None) -> None:
+    """记录推送成败到 data/push_status.json（跨运行累计连续失败，供早盘告警）。
+
+    ok=None 表示 webhook 未配置、推送由外部通道负责，本函数跳过不记录。
+    """
+    if ok is None:
+        return  # 外部通道（如 WorkBuddy 定时任务企微 bot 同步）负责推送，脚本未尝试
     p = Path(base_dir) / "data" / "push_status.json"
     try:
         st = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
@@ -236,9 +245,8 @@ def _record_push_status(base_dir: str, ok: bool) -> None:
 def _warn_if_push_repeatedly_failing(base_dir: str) -> None:
     """若企微推送（webhook 直发模式）已连续多次失败，打印醒目告警（不阻断本次运行）。
 
-    注意：agentTurn/announce 模式下主通道是 gateway 的 announce，push_to_wecom 因
-    WECOM_WEBHOOK_URL 未配永远返回 False，consecutive_failures 会持续虚高——此场景
-    不在此告警（避免误报），管道健康改由 _emit_pipeline_health 经 gateway 探活覆盖。
+    注意：当且仅当 WECOM_WEBHOOK_URL 已配置时推送才可能成功；未配则不在此告警
+    （避免误报），管道健康改由 _emit_pipeline_health 经 webhook 配置自检覆盖。
     """
     if not os.environ.get("WECOM_WEBHOOK_URL"):
         return
@@ -251,37 +259,23 @@ def _warn_if_push_repeatedly_failing(base_dir: str) -> None:
         return
     cf = int(st.get("consecutive_failures", 0))
     if cf >= 3:
-        print(f"\n🚨 企微推送已连续 {cf} 次失败！请检查 openclaw gateway 是否在线"
-              f"（curl -s -o /dev/null -w '%{{http_code}}' http://127.0.0.1:18789/）。"
-              f"本次仍会尝试推送。")
-
-
-def _gateway_alive() -> bool:
-    """探活 OpenClaw gateway(127.0.0.1:18789)，决定 announce→企微 能否送达。"""
-    try:
-        import urllib.request
-        with urllib.request.urlopen(
-            urllib.request.Request("http://127.0.0.1:18789/"), timeout=3
-        ) as r:
-            return r.status == 200
-    except Exception:
-        return False
+        print(f"\n🚨 企微推送已连续 {cf} 次失败！请检查 WECOM_WEBHOOK_URL 群机器人"
+              f" webhook 是否有效（是否被撤销/过期）。本次仍会尝试推送。")
 
 
 def _emit_pipeline_health() -> None:
-    """早报开头自检推送管道：gateway 探活。
+    """早报开头自检推送管道：说明当前推送方式。
 
-    让'gateway 挂→announce 哑火'从被动发现变主动告警（不阻断主流程）。
-    仅覆盖脚本可感知的半场景；若 cron 根本未触发，本函数不会运行，仍需用户
-    侧以'是否收到早报'作为管道健康的最终判据。
+    脚本不再负责推送（webhook 未配时由外部通道如 WorkBuddy 定时任务企微 bot 同步
+    自动路由到企微；webhook 配了则双保险直发）。本函数仅打印信息，不阻断主流程。
     """
-    if _gateway_alive():
-        print("✅ 推送管道自检：gateway(18789) 在线，announce→企微通道可用。")
+    webhook = os.environ.get("WECOM_WEBHOOK_URL")
+    if webhook:
+        print("✅ 推送管道：WECOM_WEBHOOK_URL 已配置，早报将经群机器人直发企微（双保险）。")
     else:
         print(
-            "\n🚨 推送管道告警：gateway(127.0.0.1:18789) 探活失败！\n"
-            "   今日早报可能无法经 announce 送达企微。请核实 `openclaw daemon status`，\n"
-            "   或手动重跑早盘任务。"
+            "ℹ️  推送管道：脚本不直发企微（WECOM_WEBHOOK_URL 未配置），"
+            "报告将由外部通道（如 WorkBuddy 定时任务企微 bot 同步）自动路由推送。"
         )
 
 
@@ -402,7 +396,7 @@ def main():
         print("=" * 70)
         return run_day_review(str(base_dir))
     
-    # 推送管道自检（gateway 探活）：让哑火从被动发现变主动告警
+    # 推送管道信息提示（说明当前推送方式：webhook 直发 / 外部通道自动路由）
     _emit_pipeline_health()
 
     print(f"🚀 启动A股{get_analysis_type_name(analysis_type)}分析")
