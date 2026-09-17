@@ -29,6 +29,7 @@ REPORTS = ROOT / "reports"
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from prediction_accuracy_hud import build_hud_lines, compute_accuracy  # noqa: E402
+import portfolio_manager as pm  # noqa: E402
 
 TOPN = 8
 DISCLAIMER = "本推送为系统自动生成的公式信号/研究记录，不构成个人投资建议。"
@@ -111,6 +112,34 @@ def tilt_signal_line(tilt):
     bd = tilt["target_bond"] * 100
     return (f"沪深300 z={z:+.2f}（{label}）→ 目标 股{eq:.1f}% / 债{bd:.1f}%"
             f"（收盘 {tilt['last_close']:.2f} @ {tilt['last_date']}）")
+
+
+def rebalance_demo_lines():
+    """若 portfolio.json 有持仓，生成份额级再平衡指令（虚拟则标注演示）。
+
+    复用 portfolio_manager 的 load/evaluate/actions（只读、无写文件副作用）。
+    取价失败（无网络）或无持仓 → 返回 []，由调用方回退到比例级建仓指令。
+    """
+    pf = pm.load()
+    if not pf or not pf.get("holdings"):
+        return []
+    try:
+        ev = pm.evaluate(pf)
+    except Exception:
+        return []
+    if not ev.get("ok"):
+        return []
+    acts = pm.actions(pf)
+    pick = [l for l in acts if l.startswith(("🔧", "✅", "当前"))]
+    if not pick:
+        return []
+    # 剥掉交易所前缀 sh/sz，显示纯6位代码（如 510300 / 511010）
+    clean = [re.sub(r"\b(?:sh|sz)(\d{6})\b", r"\1", l) for l in pick]
+    if pf.get("virtual"):
+        tag = f"（虚拟持仓 {ev['total']:,.0f}元 · 非真实资金演示）"
+    else:
+        tag = "（基于你的真实持仓）"
+    return [f"〔份额级调仓·演示〕{tag}"] + ["  " + l for l in clean]
 
 
 # ---------- 通用工具 ----------
@@ -212,17 +241,22 @@ def build_morning():
 
     tilt = compute_tilt_signal()
     tl = tilt_signal_line(tilt)
-    eq = tilt["target_equity"] * 100 if tilt else 0
-    bd = tilt["target_bond"] * 100 if tilt else 0
-
     market = " ".join(x for x in (sent, state) if x) or "数据暂不可用"
+    demo = rebalance_demo_lines()
 
     lines = [
         f"📊 A股早盘 · {_cn_date(datestr)}",
         "",
         f"〔配置信号·唯一可操作〕{tl}",
-        f"  建仓指令（当前无持仓）：按比例买入 510300(沪深300ETF) {eq:.1f}% + 511010(国债ETF) {bd:.1f}%（用你的总资金）",
-        "  建仓后：股债偏离目标>5pp 或满一年自动再平衡，每日推送份额级调仓单",
+    ]
+    if demo:
+        lines += demo
+    else:
+        eq = tilt["target_equity"] * 100 if tilt else 0
+        bd = tilt["target_bond"] * 100 if tilt else 0
+        lines.append(f"  建仓指令（当前无持仓）：按比例买入 510300(沪深300ETF) {eq:.1f}% + 511010(国债ETF) {bd:.1f}%（用你的总资金）")
+    lines += [
+        "  偏离>5pp 或满一年自动再平衡，建仓后每日推送份额级调仓单",
         f"〔市场〕{market}",
         "",
         "——",
@@ -236,6 +270,7 @@ def build_close():
     datestr = _today()
     tilt = compute_tilt_signal()
     tl = tilt_signal_line(tilt)
+    demo = rebalance_demo_lines()
 
     rep_txt = ""
     dr = sorted(glob.glob(str(REPORTS / "day_review_report_*.txt")))
@@ -247,7 +282,13 @@ def build_close():
     lines = [
         f"📊 A股收盘 · {_cn_date(datestr)}",
         "",
-        f"〔配置信号·唯一可操作〕{tl}；偏离未达触发线→今日无需操作（已建仓者）",
+        f"〔配置信号·唯一可操作〕{tl}",
+    ]
+    if demo:
+        lines += demo
+    else:
+        lines.append("  偏离未达触发线→今日无需操作（已建仓者）；未建仓者按上方目标比例建仓")
+    lines += [
         "〔已关闭线·诚实存档〕日频个股预测 累计一致率42.9% n=1006 z=−4.48 p=7.6e-6（显著反向，已停推）",
         "〔准确率看板·历史证据〕",
     ] + hud + [
