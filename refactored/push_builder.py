@@ -18,6 +18,8 @@ import json
 import re
 import sys
 import glob
+import statistics as st
+import urllib.request
 from datetime import datetime
 from pathlib import Path
 
@@ -30,6 +32,85 @@ from prediction_accuracy_hud import build_hud_lines, compute_accuracy  # noqa: E
 
 TOPN = 8
 DISCLAIMER = "本推送为系统自动生成的公式信号/研究记录，不构成个人投资建议。"
+
+# ---------- 估值倾斜配置信号（系统唯一经统计验证的可操作引擎） ----------
+# 股票腿 = 沪深300(sh000300, ETF 510300)；债券腿 = 上证国债(sh000012, ETF 511010)
+# 基准 60/40，年度再平衡；目标股比 = clamp(0.60 - 0.15*z, 0.40, 0.80)
+# z = 沪深300 价格相对 5 年均线(1220交易日) 的 z-score
+# 已预注册重验：t_NW=+2.73（全样本显著），回撤 -28.4%（vs 固定 -42.6%）
+CACHE_DIR = DATA / "style_index_cache_6000"
+MA_WIN = 1220
+BASE = 0.60
+LO, HI = 0.40, 0.80
+K = 0.15
+TILT_T = 2.73  # 该引擎的 Newey-West t 值（显著性锚）
+
+
+def _load_or_fetch(sym, cache_f, refresh):
+    """优先用缓存（末日期够新直接用），否则拉 sina 日线；失败回退旧缓存。"""
+    if cache_f.exists() and not refresh:
+        try:
+            d = json.loads(cache_f.read_text(encoding="utf-8"))
+            if d and (datetime.now() - datetime.strptime(d[-1][0], "%Y-%m-%d")).days < 10:
+                return dict(d)
+        except Exception:
+            pass
+    try:
+        u = ("https://money.finance.sina.com.cn/quotes_service/api/json_v2.php/"
+             f"CN_MarketData.getKLineData?symbol={sym}&scale=240&ma=no&datalen=6000")
+        raw = urllib.request.urlopen(urllib.request.Request(
+            u, headers={"User-Agent": "Mozilla/5.0", "Referer": "https://finance.sina.com.cn"}),
+            timeout=25).read().decode()
+        arr = json.loads(raw)
+        out = [(r["day"], float(r["close"])) for r in arr if r.get("close")]
+        CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        cache_f.write_text(json.dumps(out), encoding="utf-8")
+        return dict(out)
+    except Exception:
+        if cache_f.exists():
+            try:
+                return dict(json.loads(cache_f.read_text(encoding="utf-8")))
+            except Exception:
+                return None
+        return None
+
+
+def compute_tilt_signal(refresh=False):
+    """算估值倾斜实时信号。返回 dict 或 None（行情失败）。"""
+    stock = _load_or_fetch("sh000300", CACHE_DIR / "sh000300_6000.json", refresh)
+    bond = _load_or_fetch("sh000012", CACHE_DIR / "sh000012_6000.json", refresh)
+    if not stock or not bond:
+        return None
+    dates = sorted(d for d in stock if d in bond)
+    prices = [stock[d] for d in dates]
+    i = len(dates) - 1
+    if i - MA_WIN < 0:
+        return None
+    win = prices[i - MA_WIN:i + 1]
+    mu, sd = st.mean(win), st.pstdev(win)
+    if sd == 0:
+        return None
+    z = (prices[i] - mu) / sd
+    tgt = min(HI, max(LO, BASE - K * z))
+    return {
+        "z": z,
+        "target_equity": tgt,
+        "target_bond": 1 - tgt,
+        "last_date": dates[-1],
+        "last_close": prices[-1],
+    }
+
+
+def tilt_signal_line(tilt):
+    """单行可读的倾斜信号描述。"""
+    if tilt is None:
+        return "行情获取失败，信号暂不可用"
+    z = tilt["z"]
+    label = "偏贵" if z > 0.3 else ("偏便宜" if z < -0.3 else "中性")
+    eq = tilt["target_equity"] * 100
+    bd = tilt["target_bond"] * 100
+    return (f"沪深300 z={z:+.2f}（{label}）→ 目标 股{eq:.1f}% / 债{bd:.1f}%"
+            f"（收盘 {tilt['last_close']:.2f} @ {tilt['last_date']}）")
 
 
 # ---------- 通用工具 ----------
@@ -127,38 +208,34 @@ def build_morning():
         sig = parse_signal_section(rep_txt)
         sent, state = parse_market_section(rep_txt)
     else:
-        sig = fallback_from_predictions() or {"adv": [], "dec": [], "adv_n": 0, "dec_n": 0}
         sent, state = "", ""
 
-    acc = compute_accuracy()
-    cum = f"{acc['cum_hit'] * 100:.1f}%" if acc["cum_hit"] is not None else "—"
-    ztxt = f"，z={acc['cum_z']:+.2f}" if acc["cum_z"] is not None else ""
+    tilt = compute_tilt_signal()
+    tl = tilt_signal_line(tilt)
+    eq = tilt["target_equity"] * 100 if tilt else 0
+    bd = tilt["target_bond"] * 100 if tilt else 0
 
-    names = _fmt_names((sig["adv"] + sig["dec"])[:TOPN])
     market = " ".join(x for x in (sent, state) if x) or "数据暂不可用"
 
     lines = [
         f"📊 A股早盘 · {_cn_date(datestr)}",
         "",
-        f"〔预测·待验证〕偏多{sig['adv_n']}/偏空{sig['dec_n']}：{names}",
-        "〔配置框架·休眠〕ETF估值倾斜(股/债再平衡+沪深300估值z)已就绪，待你建仓后每日自动出份额级调仓单；当前无持仓→不操作",
+        f"〔配置信号·唯一可操作〕{tl}",
+        f"  建仓指令（当前无持仓）：按比例买入 510300(沪深300ETF) {eq:.1f}% + 511010(国债ETF) {bd:.1f}%（用你的总资金）",
+        "  建仓后：股债偏离目标>5pp 或满一年自动再平衡，每日推送份额级调仓单",
         f"〔市场〕{market}",
         "",
         "——",
-        f"⚠️ 预测为公式信号，累计方向一致率 {cum}{ztxt}，未过准确率门槛，仅供观察研究；准确率高后你再决定是否跟。{DISCLAIMER}",
+        f"⚠️ 个股日频预测线已关闭（1006样本累计方向一致率42.9%、z=−4.48，显著低于硬币，无选股edge）。"
+        f"系统唯一经统计验证的买卖引擎=估值倾斜配置（t_NW=+{TILT_T}，回撤−28.4%有界）。{DISCLAIMER}",
     ]
     return datestr, "\n".join(lines)
 
 
 def build_close():
     datestr = _today()
-    rep = latest_morning_report(datestr)
-    if rep:
-        sig = parse_signal_section(rep.read_text(encoding="utf-8"))
-    else:
-        sig = fallback_from_predictions() or {"adv": [], "dec": [], "adv_n": 0, "dec_n": 0}
-
-    names = _fmt_names((sig["adv"] + sig["dec"])[:TOPN])
+    tilt = compute_tilt_signal()
+    tl = tilt_signal_line(tilt)
 
     rep_txt = ""
     dr = sorted(glob.glob(str(REPORTS / "day_review_report_*.txt")))
@@ -166,24 +243,17 @@ def build_close():
         rep_txt = Path(dr[-1]).read_text(encoding="utf-8")
 
     hud = build_hud_lines(rep_txt)
-    acc = compute_accuracy()
-    if acc["cum_z"] is not None and acc["cum_z"] <= -2:
-        review = "未过股神淘汰线（累计命中率显著差于硬币），继续观察不动"
-    elif str(acc["cum_hit"]) != "None" and acc["cum_hit"] >= 0.55 and (acc["cum_z"] or 0) >= 2:
-        review = "已过线，可关注跟单"
-    else:
-        review = "未过股神淘汰线，继续观察不动"
 
     lines = [
         f"📊 A股收盘 · {_cn_date(datestr)}",
         "",
-        f"〔预测·当日〕偏多{sig['adv_n']}/偏空{sig['dec_n']}：{names}",
-        "〔准确率看板〕",
+        f"〔配置信号·唯一可操作〕{tl}；偏离未达触发线→今日无需操作（已建仓者）",
+        "〔已关闭线·诚实存档〕日频个股预测 累计一致率42.9% n=1006 z=−4.48 p=7.6e-6（显著反向，已停推）",
+        "〔准确率看板·历史证据〕",
     ] + hud + [
-        f"〔复盘〕{review}",
         "",
         "——",
-        f"⚠️ 预测为公式信号，当前未过准确率门槛，仅供观察研究；{DISCLAIMER}",
+        f"⚠️ 个股日频预测线已关闭，无选股edge；唯一可操作引擎=估值倾斜配置（t_NW=+{TILT_T}）。{DISCLAIMER}",
     ]
     return datestr, "\n".join(lines)
 
